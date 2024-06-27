@@ -8,28 +8,60 @@ __lua__
 -------------------------------
 
 function _init()
-
+	state=0 -- title
+	init_title()
 end
 
 function _update()
-
+	if (state==0) then
+		update_title()
+	elseif (state==1) then
+		update_game()
+	end
 end
 
 function _draw()
-	cls()
-	map(0,0,0,0,128,32)
+	if (state==0) then
+		draw_title()
+	elseif (state==1) then
+		draw_game()
+	end
 end
 
 -------------------------------
 -- title functions ------------
 -------------------------------
 
+function init_title()
 
+end
 
+function update_title()
+	if (btnp(5)) state=1
+end
+
+function draw_title()
+	cls()
+	print("welcome to go!",8,8,10)
+	print("press X to start",8,16,10)
+end
 
 -------------------------------
 -- game functions -------------
 -------------------------------
+
+function init_game()
+
+end
+
+function update_game()
+
+end
+
+function draw_game()
+	cls()
+	map(0,0,0,0,128,32)
+end
 
 __gfx__
 00000000ffffffffffffffffffffffffffff5fffffff5fffffff5fff0000000000000000ffffffffffffffffffffffff00000000000000000000000000000000
