@@ -27,7 +27,7 @@ end
 -------------------------------
 
 function init_title()
-
+	--not sure if i need anything here?
 end
 
 function update_title()
@@ -59,13 +59,13 @@ end
 
 function update_game()
 	if (not game_over) do
-
+		--game loop
 	end
 
 end
 
 function draw_game()
-	cls()
+	cls(1)
 	map(0,0,0,0,128,32)
 
 	--debug console
@@ -76,12 +76,36 @@ end
 --board
 
 function make_board(size)
-	for r=1,size do
-		for c=1,size do
-			mset(r,c,18)
-		end
-	end
-end
+	for x=1,size do
+		for y=1,size do
+
+			if (y==1) then --top border
+				if (x==1) then
+					mset(x,y,1)
+				elseif (x==size) then
+					mset(x,y,3)
+				else
+					mset(x,y,2)
+				end
+			elseif (y==size) then
+				if (x==1) then --bottom border
+					mset(x,y,33)
+				elseif (x==size) then
+					mset(x,y,35)
+				else
+					mset(x,y,34)
+				end
+			elseif (x==1) then --left border
+				mset(x,y,17)
+			elseif (x==size) then --right border
+				mset(x,y,19)
+			else
+				mset(x,y,18)
+			end
+
+		end --for y
+	end --for x
+end--make_board
 
 -->8
 --utilities
