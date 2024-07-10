@@ -165,13 +165,16 @@ function place_stone(cursor)
 		end
 	end]]
 
+	stone_spr=get_stone_spr(cursor)
 
 	if (valid_move(cursor)) then
-		if (current_turn==black) then
-			mset(cursor.x/8,cursor.y/8,22)
-		else
-			mset(cursor.x/8,cursor.y/8,26)
-		end
+		--if (current_turn==black) then
+		--	  mset(cursor.x/8,cursor.y/8,22)
+		--else
+		--	  mset(cursor.x/8,cursor.y/8,26)
+		--end
+
+		mset(cursor.x/8,cursor.y/8,stone_spr)
 
 		swap_turn()
 	end
@@ -194,6 +197,44 @@ function swap_turn()
 		end
 end
 
+function get_stone_spr(cursor)
+	x=cursor.x/8
+	y=cursor.y/8
+
+	stone_spr=0
+
+	if (y==1) then --top border
+		if (x==1) then
+			stone_spr=5
+		elseif (x==size) then
+			stone_spr=7
+		else
+			stone_spr=6
+		end
+	elseif (y==size) then
+		if (x==1) then --bottom border
+			stone_spr=37
+		elseif (x==size) then
+			stone_spr=39
+		else
+			stone_spr=38
+		end
+	elseif (x==1) then --left border
+		stone_spr=21
+	elseif (x==size) then --right border
+		stone_spr=23
+	else
+		stone_spr=22 --interior points
+	end
+
+	if (current_turn==white) then
+		stone_spr+=4
+	end
+
+	return stone_spr
+
+end
+
 -->8
 --utilities
 
@@ -208,10 +249,10 @@ function draw_debug()
 	--print("size="..(board_size),0,120,8)
 	
 	--print("left="..tostr(is_tile(3,cursor.x,cursor.y)),0,120,8)
-	--print("cur.x="..cursor.x,48,120,8)
-	--print("cur.y="..cursor.y,84,120,8)
+	print("cur.x="..cursor.x,48,2,8)
+	print("cur.y="..cursor.y,84,2,8)
 
-	print("turn="..current_turn,0,120,8)
+	print("turn="..current_turn,0,2,8)
 end
 
 __gfx__
@@ -240,5 +281,5 @@ fff555ff1fffffffffffffffffffffff0000000010000000f0000000f00000000000000017777777
 ffff5fff1fffffffffffffffffffffff000000001f00000fff00000fff00000f000000001f77777fff77777fff77777f00000000000000000000000000000000
 ffff5fff1fffffffffffffffffffffff000000001ff000fffff000fffff000ff000000001ff777fffff777fffff777ff00000000000000000000000000000000
 __gff__
-00292131002a2232000404040000000000090111000a0212000404040000000001494151004a425200040404000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+00292131002a2232002c24340000000000090111000a0212000c04140000000001494151004a4252004c4454000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
